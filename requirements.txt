@@ -1,0 +1,4 @@
+flask
+pandas>=2.2.0
+slack_sdk>=3.27.0
+gunicorn

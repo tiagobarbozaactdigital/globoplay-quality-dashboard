@@ -1,0 +1,26 @@
+services:
+  csv-server:
+    image: nginx:alpine
+    container_name: globoplay-csv-server
+    volumes:
+      - ./out:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:11.6.0
+    container_name: globoplay-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - csv-server
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+    volumes:
+      # Config customizada
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+      # Provisioning automático (datasources + dashboards)
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    restart: unless-stopped

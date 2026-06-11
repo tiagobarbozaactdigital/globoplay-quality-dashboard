@@ -1,0 +1,1848 @@
+{
+  "uid": "globoplay-quality",
+  "title": "📊 Globoplay — Qualidade de Software",
+  "tags": [
+    "globoplay",
+    "quality"
+  ],
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "panels": [
+    {
+      "id": 1,
+      "title": "⭐ Nota Média Geral",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "data": "",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "url_options": {
+            "method": "GET"
+          },
+          "root_selector": "",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "string" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 2.5
+              },
+              {
+                "color": "green",
+                "value": 3.5
+              }
+            ]
+          },
+          "decimals": 2
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/nota_media/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 2,
+      "title": "📈 NPS Estimado",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/nps_global.csv",
+          "parser": "backend",
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 30
+              }
+            ]
+          },
+          "decimals": 1
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/nps/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 3,
+      "title": "📝 Total de Reviews",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "string" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "blue"
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/reviews/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 4,
+      "title": "🔴 Reviews com Problema",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "string" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "red"
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/problemas_reportados/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 5,
+      "title": "💡 Sugestões",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "string" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed",
+            "fixedColor": "purple"
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/sugestoes/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 6,
+      "title": "% Negativo (média)",
+      "type": "stat",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "string" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "unit": "percent",
+          "decimals": 1,
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/pct_negativo/"
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 10,
+      "title": "📈 Tendência Diária — Nota Média vs Problemas",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/tendencia_diaria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "timestamp" },
+            { "selector": "reviews", "text": "reviews", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "pct_negativo", "text": "pct_negativo", "type": "number" },
+            { "selector": "problemas_reportados", "text": "problemas_reportados", "type": "number" },
+            { "selector": "sugestoes", "text": "sugestoes", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10,
+            "pointSize": 5,
+            "showPoints": "always"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "nota_media"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "green"
+                }
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              },
+              {
+                "id": "displayName",
+                "value": "⭐ Nota Média"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "problemas_reportados"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "red"
+                }
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "displayName",
+                "value": "🔴 Problemas"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reviews"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "fixed",
+                  "fixedColor": "blue"
+                }
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 30
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "displayName",
+                "value": "📝 Reviews"
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "title": "🔴 Top Categorias de Problema",
+      "type": "piechart",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/top_problemas.csv",
+          "columns": [
+            { "selector": "categoria_problema", "text": "categoria_problema", "type": "string" },
+            { "selector": "ocorrencias", "text": "ocorrencias", "type": "number" },
+            { "selector": "pct_do_total", "text": "pct_do_total", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "pct_do_total": true
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": {
+          "values": true,
+          "calcs": [],
+          "fields": "/ocorrencias/"
+        },
+        "pieType": "donut",
+        "tooltip": {
+          "mode": "multi"
+        },
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": ["value", "percent"],
+          "calcs": []
+        }
+      }
+    },
+    {
+      "id": 21,
+      "title": "📱 NPS por Plataforma",
+      "type": "barchart",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/nps_por_plataforma.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "plataforma", "text": "plataforma", "type": "string" },
+            { "selector": "total_reviews", "text": "total_reviews", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" },
+            { "selector": "neutros", "text": "neutros", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "nps", "text": "nps", "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 30
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Reviews"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "tooltip": false,
+                  "viz": true,
+                  "legend": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xField": "plataforma",
+        "showValue": "always",
+        "barWidth": 0.7
+      }
+    },
+    {
+      "id": 30,
+      "title": "🏗️ Quality Score por Versão do App",
+      "type": "table",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/quality_score_por_versao.csv",
+          "parser": "backend",
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Quality Score"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 20
+                    },
+                    {
+                      "color": "green",
+                      "value": 50
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Versão",
+            "desc": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "title": "📱 Dispositivos Mais Problemáticos",
+      "type": "table",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/dispositivos_problematicos.csv",
+          "parser": "backend",
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Reviews c/ Problema"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "orange",
+                      "value": 3
+                    },
+                    {
+                      "color": "red",
+                      "value": 10
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Reviews c/ Problema",
+            "desc": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "title": "🎭 Distribuição de Sentimento",
+      "type": "piechart",
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 32
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/sentimento_geral.csv",
+          "columns": [
+            { "selector": "sentiment", "text": "sentiment", "type": "string" },
+            { "selector": "total", "text": "total", "type": "number" },
+            { "selector": "percentual", "text": "percentual", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "percentual": true
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Negative" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Positive" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Neutral" },
+            "properties": [{ "id": "color", "value": { "mode": "fixed", "fixedColor": "yellow" } }]
+          }
+        ]
+      },
+      "options": {
+        "reduceOptions": {
+          "values": true,
+          "calcs": [],
+          "fields": "/total/"
+        },
+        "pieType": "donut",
+        "tooltip": {
+          "mode": "multi"
+        },
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": ["value", "percent"]
+        }
+      }
+    },
+    {
+      "id": 51,
+      "title": "📱 Sentimento por Plataforma",
+      "type": "table",
+      "gridPos": {
+        "h": 9,
+        "w": 16,
+        "x": 8,
+        "y": 32
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/sentimento_por_plataforma.csv",
+          "columns": [
+            { "selector": "plataforma", "text": "plataforma", "type": "string" },
+            { "selector": "sentiment", "text": "sentiment", "type": "string" },
+            { "selector": "total", "text": "total", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "total" },
+            "properties": [
+              { "id": "displayName", "value": "Total" },
+              {
+                "id": "custom.cellOptions",
+                "value": { "type": "color-background" }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "transparent", "value": null },
+                    { "color": "yellow", "value": 20 },
+                    { "color": "orange", "value": 100 },
+                    { "color": "red", "value": 300 }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "plataforma" },
+            "properties": [{ "id": "displayName", "value": "Plataforma" }]
+          },
+          {
+            "matcher": { "id": "byName", "options": "sentiment" },
+            "properties": [{ "id": "displayName", "value": "Sentimento" }]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          { "displayName": "Total", "desc": true }
+        ]
+      }
+    },
+    {
+      "id": 52,
+      "title": "📈 Tendência Diária de Sentimento",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/sentimento_diario.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia", "text": "dia", "type": "timestamp" },
+            { "selector": "Positive", "text": "Positive", "type": "number" },
+            { "selector": "Neutral", "text": "Neutral", "type": "number" },
+            { "selector": "Negative", "text": "Negative", "type": "number" }
+          ],
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "pointSize": 4,
+            "showPoints": "always",
+            "stacking": { "mode": "normal" }
+          }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Positive" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "green" } },
+              { "id": "displayName", "value": "🟢 Positivo" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Neutral" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "yellow" } },
+              { "id": "displayName", "value": "🟡 Neutro" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Negative" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } },
+              { "id": "displayName", "value": "🔴 Negativo" }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    },
+    {
+      "id": 40,
+      "title": "🗂️ Problemas por Plataforma",
+      "type": "table",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/problemas_por_plataforma.csv",
+          "parser": "backend",
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ocorrências"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 3
+                    },
+                    {
+                      "color": "orange",
+                      "value": 10
+                    },
+                    {
+                      "color": "red",
+                      "value": 25
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "Ocorrências",
+            "desc": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "title": "💡 Sugestões de Melhoria dos Usuários",
+      "type": "table",
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 50
+      },
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/sugestoes_usuarios.csv",
+          "parser": "backend",
+          "datasource": {
+            "uid": "csv-local",
+            "type": "yesoreyeram-infinity-datasource"
+          },
+          "url_options": {
+            "method": "GET"
+          }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sugestão do Usuário"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 600
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true
+      }
+    },
+    {
+      "id": 60,
+      "title": "🔄 Force Update / Atualização Forçada",
+      "type": "row",
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 59 },
+      "panels": []
+    },
+    {
+      "id": 61,
+      "title": "🔄 Reviews c/ Force Update",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 4, "x": 0, "y": 60 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_dia.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia",        "text": "dia",        "type": "string" },
+            { "selector": "total",      "text": "total",      "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "orange" }
+        }
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["sum"], "fields": "/total/" },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 62,
+      "title": "⭐ Nota Média (Force Update)",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 4, "x": 4, "y": 60 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_dia.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia",        "text": "dia",        "type": "string" },
+            { "selector": "total",      "text": "total",      "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "color": { "mode": "thresholds" },
+          "thresholds": {
+            "steps": [
+              { "color": "red",    "value": null },
+              { "color": "yellow", "value": 2.5  },
+              { "color": "green",  "value": 3.5  }
+            ]
+          }
+        }
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["mean"], "fields": "/nota_media/" },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 63,
+      "title": "🔴 Detratores (Force Update)",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 4, "x": 8, "y": 60 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_dia.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia",        "text": "dia",        "type": "string" },
+            { "selector": "total",      "text": "total",      "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "red" }
+        }
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["sum"], "fields": "/detratores/" },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 64,
+      "title": "✅ Promotores (Force Update)",
+      "type": "stat",
+      "gridPos": { "h": 5, "w": 4, "x": 12, "y": 60 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_dia.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia",        "text": "dia",        "type": "string" },
+            { "selector": "total",      "text": "total",      "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "green" }
+        }
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["sum"], "fields": "/promotores/" },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "value"
+      }
+    },
+    {
+      "id": 65,
+      "title": "📅 Frequência Diária — Force Update",
+      "type": "timeseries",
+      "gridPos": { "h": 9, "w": 14, "x": 0, "y": 65 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_vs_nota_media.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "dia",        "text": "dia",        "type": "timestamp" },
+            { "selector": "total",      "text": "total",      "type": "number" },
+            { "selector": "nota_media", "text": "nota_media", "type": "number" },
+            { "selector": "detratores", "text": "detratores", "type": "number" },
+            { "selector": "promotores", "text": "promotores", "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 2,
+            "fillOpacity": 40,
+            "pointSize": 5,
+            "showPoints": "always"
+          },
+          "noValue": "0"
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "total" },
+            "properties": [
+              { "id": "displayName",           "value": "🔄 Reclamações" },
+              { "id": "color",                 "value": { "mode": "fixed", "fixedColor": "orange" } },
+              { "id": "custom.axisPlacement",  "value": "left" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "detratores" },
+            "properties": [
+              { "id": "displayName",           "value": "🔴 Detratores" },
+              { "id": "color",                 "value": { "mode": "fixed", "fixedColor": "red" } },
+              { "id": "custom.drawStyle",      "value": "line" },
+              { "id": "custom.axisPlacement",  "value": "right" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "nota_media" },
+            "properties": [
+              { "id": "custom.hideFrom", "value": { "tooltip": false, "viz": true, "legend": true } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "promotores" },
+            "properties": [
+              { "id": "custom.hideFrom", "value": { "tooltip": false, "viz": true, "legend": true } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      }
+    },
+    {
+      "id": 66,
+      "title": "🏷️ Versões Mais Afetadas por Force Update",
+      "type": "barchart",
+      "gridPos": { "h": 9, "w": 10, "x": 14, "y": 65 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_versao.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "app_version", "text": "app_version", "type": "string" },
+            { "selector": "total",       "text": "total",       "type": "number" },
+            { "selector": "nota_media",  "text": "nota_media",  "type": "number" },
+            { "selector": "detratores",  "text": "detratores",  "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "fixed", "fixedColor": "orange" }
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "detratores" },
+            "properties": [
+              { "id": "color", "value": { "mode": "fixed", "fixedColor": "red" } },
+              { "id": "displayName", "value": "🔴 Detratores" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "total" },
+            "properties": [
+              { "id": "displayName", "value": "🔄 Total" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "nota_media" },
+            "properties": [
+              { "id": "custom.hideFrom", "value": { "tooltip": false, "viz": true, "legend": true } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xField": "app_version",
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      }
+    },
+
+    {
+  "id": 70,
+  "title": "📉 Impacto Force Update vs Nota Média",
+  "type": "timeseries",
+  "gridPos": { "h": 9, "w": 24, "x": 0, "y": 85 },
+  "datasource": {
+    "uid": "csv-local",
+    "type": "yesoreyeram-infinity-datasource"
+  },
+  "targets": [
+    {
+      "refId": "A",
+      "type": "csv",
+      "source": "url",
+      "format": "table",
+      "url": "http://csv-server/force_update_vs_nota_media.csv",
+      "parser": "backend",
+      "columns": [
+        { "selector": "dia", "text": "dia", "type": "timestamp" },
+        { "selector": "nota_media_geral", "text": "nota_media_geral", "type": "number" },
+        { "selector": "pct_force_update", "text": "pct_force_update", "type": "number" }
+      ],
+      "url_options": { "method": "GET" }
+    }
+  ],
+  "fieldConfig": {
+    "defaults": {
+      "custom": {
+        "drawStyle": "line",
+        "lineWidth": 2,
+        "fillOpacity": 10,
+        "pointSize": 5,
+        "showPoints": "always"
+      }
+    },
+    "overrides": [
+      {
+        "matcher": { "id": "byName", "options": "nota_media_geral" },
+        "properties": [
+          {
+            "id": "color",
+            "value": { "mode": "fixed", "fixedColor": "green" }
+          },
+          {
+            "id": "custom.axisPlacement",
+            "value": "left"
+          },
+          {
+            "id": "displayName",
+            "value": "⭐ Nota Média Geral"
+          }
+        ]
+      },
+      {
+  "matcher": { "id": "byName", "options": "pct_force_update" },
+  "properties": [
+    {
+      "id": "color",
+      "value": { "mode": "fixed", "fixedColor": "orange" }
+    },
+    {
+      "id": "unit",
+      "value": "percentunit"
+    },
+    {
+      "id": "min",
+      "value": 0
+    },
+    {
+      "id": "max",
+      "value": 0.05
+    },
+    {
+      "id": "custom.axisPlacement",
+      "value": "right"
+    },
+    {
+      "id": "displayName",
+      "value": "🔄 % Force Update"
+    }
+  ]
+}
+    ]
+  },
+  "options": {
+    "legend": {
+      "displayMode": "list",
+      "placement": "bottom"
+    },
+    "tooltip": {
+      "mode": "multi"
+    }
+  }
+},
+
+    {
+      "id": 67,
+      "title": "📋 Subcategorias de Force Update",
+      "type": "piechart",
+      "gridPos": { "h": 9, "w": 10, "x": 0, "y": 74 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_subcategoria.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "subcategoria", "text": "subcategoria", "type": "string" },
+            { "selector": "total",        "text": "total",        "type": "number" },
+            { "selector": "nota_media",   "text": "nota_media",   "type": "number" },
+            { "selector": "detratores",   "text": "detratores",   "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": { "nota_media": true, "detratores": true }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" } }
+      },
+      "options": {
+        "reduceOptions": { "values": true, "calcs": [], "fields": "/total/" },
+        "pieType": "donut",
+        "tooltip": { "mode": "multi" },
+        "legend": { "displayMode": "table", "placement": "right", "values": ["value", "percent"] }
+      }
+    },
+    {
+      "id": 68,
+      "title": "📱 Force Update por Plataforma",
+      "type": "barchart",
+      "gridPos": { "h": 9, "w": 7, "x": 10, "y": 74 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_por_plataforma.csv",
+          "parser": "backend",
+          "columns": [
+            { "selector": "plataforma",  "text": "plataforma",  "type": "string" },
+            { "selector": "total",       "text": "total",       "type": "number" },
+            { "selector": "nota_media",  "text": "nota_media",  "type": "number" },
+            { "selector": "detratores",  "text": "detratores",  "type": "number" }
+          ],
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" } },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "nota_media" },
+            "properties": [
+              { "id": "custom.hideFrom", "value": { "tooltip": false, "viz": true, "legend": true } }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xField": "plataforma",
+        "legend": { "displayMode": "list", "placement": "bottom" },
+        "tooltip": { "mode": "multi" }
+      }
+    },
+    {
+      "id": 69,
+      "title": "📝 Reviews Force Update — Detalhes",
+      "type": "table",
+      "gridPos": { "h": 9, "w": 7, "x": 17, "y": 74 },
+      "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/force_update_reviews.csv",
+          "parser": "backend",
+          "datasource": { "uid": "csv-local", "type": "yesoreyeram-infinity-datasource" },
+          "url_options": { "method": "GET" }
+        }
+      ],
+      "fieldConfig": {
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "texto_limpo" },
+            "properties": [ { "id": "custom.width", "value": 500 } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "stars" },
+            "properties": [
+              { "id": "displayName", "value": "⭐" },
+              {
+                "id": "custom.cellOptions",
+                "value": { "type": "color-background" }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    { "color": "red",    "value": null },
+                    { "color": "yellow", "value": 3    },
+                    { "color": "green",  "value": 4    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [ { "displayName": "dia", "desc": true } ]
+      }
+    },
+    {
+      "id": 90,
+      "title": "📊 Baseline (14d) — Nota Média",
+      "type": "timeseries",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 95 },
+
+      "datasource": {
+        "uid": "csv-local",
+        "type": "yesoreyeram-infinity-datasource"
+      },
+
+      "targets": [
+        {
+          "refId": "A",
+          "type": "csv",
+          "source": "url",
+          "format": "table",
+          "url": "http://csv-server/baseline_vs_nota.csv",
+          "parser": "backend",
+          
+  "columns": [
+  { "selector": "dia", "text": "dia", "type": "timestamp" },
+  { "selector": "nota_media", "text": "nota_media", "type": "number" },
+  { "selector": "baseline_14d", "text": "baseline_14d", "type": "number" }
+]
+,
+          "url_options": { "method": "GET" }
+        }
+      ],
+
+      "fieldConfig": {
+      "overrides": [
+  {
+    "matcher": { "id": "byName", "options": "nota_media" },
+    "properties": [
+      {
+        "id": "color",
+        "value": { "mode": "fixed", "fixedColor": "green" }
+      },
+      {
+        "id": "displayName",
+        "value": "⭐ Nota Média"
+      }
+    ]
+  },
+  {
+    "matcher": { "id": "byName", "options": "baseline_14d" },
+    "properties": [
+      {
+        "id": "color",
+        "value": { "mode": "fixed", "fixedColor": "blue" }
+      },
+      {
+        "id": "displayName",
+        "value": "📊 Baseline 14d"
+      }
+    ]
+  }
+]
+      },
+
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      }
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 40,
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "version": 2
+}
+
+
+
